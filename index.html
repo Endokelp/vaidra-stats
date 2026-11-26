@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vaidra in numbers</title>
+  <meta name="description" content="Partner reach, library size and volunteer counts for Vaidra, a nonprofit publishing free courses, audiobooks and research-paper explainers in Indian languages.">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src data:; connect-src 'self' https://www.vaidra.org http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'">
+  <link rel="icon" href="data:,">
+  <link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <noscript><link rel="stylesheet" href="noscript.css"></noscript>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="edge top">
+    <a class="brand" href="https://www.vaidra.org">Vaidra</a>
+  </header>
+
+  <main id="app">
+    <div class="intro edge">
+      <h1 class="eyebrow">Vaidra in numbers</h1>
+      <p class="lede">Free courses, audiobooks and research-paper explainers in Indian languages.</p>
+      <p class="meta" id="updated" hidden>Updated <time id="updated-time"></time></p>
+      <p class="meta warn" id="stale" hidden>The last refresh failed, so these are the most recent numbers we got.</p>
+    </div>
+
+    <p class="loading edge" id="loading" role="status">Loading the latest numbers&hellip;</p>
+    <noscript><p class="loading edge">These numbers are loaded by a script from vaidra.org. Turn JavaScript on to see them.</p></noscript>
+
+    <section class="failure edge" id="error" role="alert" hidden>
+      <h2>The numbers could not be loaded</h2>
+      <p>Nothing is shown rather than a guess. The numbers come from vaidra.org, which may be busy or offline.</p>
+      <p class="meta" id="error-detail"></p>
+      <button type="button" id="retry">Try again</button>
+    </section>
+
+    <div id="data" hidden>
+      <section class="block reach" aria-labelledby="reach-h">
+        <div class="reach-main">
+          <h2 class="eyebrow" id="reach-h">Partner reach</h2>
+          <p class="num-hero"><span data-f="students"></span><span class="unit"> students</span></p>
+          <p class="num-mid"><span data-f="schools"></span><span class="unit"> schools</span></p>
+          <p class="note">Combined student networks of Vaidra's school and NGO partners, as of <span data-f="asOf"></span>.</p>
+        </div>
+        <div class="reach-partners">
+          <h3 class="eyebrow">Partners</h3>
+          <ul class="ruled" id="partners"></ul>
+        </div>
+      </section>
+
+      <section class="block band library" aria-labelledby="lib-h">
+        <div>
+          <h2 class="eyebrow" id="lib-h">Library</h2>
+          <p class="num-lib"><span data-f="total"></span><span class="unit"> titles</span></p>
+          <dl class="ledger">
+            <div><dt>Courses</dt><dd data-f="courses"></dd></div>
+            <div><dt>Audiobooks</dt><dd data-f="audiobooks"></dd></div>
+            <div><dt>Research papers</dt><dd data-f="researchPapers"></dd></div>
+          </dl>
+        </div>
+        <div id="langs">
+          <h3 class="eyebrow">Titles by language</h3>
+          <ul class="bars" id="languages"></ul>
+        </div>
+      </section>
+
+      <section class="block volunteers" aria-labelledby="vol-h">
+        <div>
+          <h2 class="eyebrow" id="vol-h">Volunteers</h2>
+          <p class="num-vol"><span data-f="volTotal"></span><span class="unit"> volunteers</span></p>
+        </div>
+        <dl class="ledger">
+          <div><dt>Teachers</dt><dd data-f="teachers"></dd></div>
+          <div><dt>Speakers</dt><dd data-f="speakers"></dd></div>
+        </dl>
+      </section>
+
+      <section class="block band traffic" id="traffic" aria-labelledby="traffic-h" hidden>
+        <div class="traffic-head">
+          <h2 class="eyebrow" id="traffic-h">Site traffic</h2>
+          <p class="note">These numbers come from measured visitors on vaidra.org via the Vercel Analytics API, shown in India time.</p>
+          <p class="meta warn" id="traffic-stale" hidden>The last refresh failed, so these are the most recent numbers we got.</p>
+        </div>
+
+        <div class="panel overview">
+          <div class="metrics" role="group" aria-label="Chart shows">
+            <button type="button" class="metric" data-metric="visitors" aria-pressed="true">
+              <span class="metric-name">Visitors</span>
+              <span class="metric-row"><span class="metric-num" id="visitors-total"></span><span class="change" id="visitors-change"></span></span>
+            </button>
+            <button type="button" class="metric" data-metric="pageviews" aria-pressed="false">
+              <span class="metric-name">Page Views</span>
+              <span class="metric-row"><span class="metric-num" id="pageviews-total"></span><span class="change" id="pageviews-change"></span></span>
+            </button>
+          </div>
+          <figure class="hourly">
+            <figcaption class="meta">Last 24 hours, India time</figcaption>
+            <div class="chart" id="hourly-chart">
+              <svg id="hourly-svg" role="img" tabindex="0"></svg>
+              <div class="tip" id="hourly-tip" hidden></div>
+            </div>
+            <div class="sr-only">
+              <table>
+                <caption>Visitors and page views per hour, India time</caption>
+                <thead><tr><th scope="col">Hour</th><th scope="col">Visitors</th><th scope="col">Page views</th></tr></thead>
+                <tbody id="hourly-rows"></tbody>
+              </table>
+            </div>
+          </figure>
+        </div>
+
+        <div class="panels">
+          <div class="panel wide"><div class="panel-head"><h3>Pages</h3><span>Visitors</span></div><ol class="rows" data-dim="requestPath"></ol></div>
+          <div class="panel wide"><div class="panel-head"><h3>Referrers</h3><span>Visitors</span></div><ol class="rows" data-dim="referrerHostname"></ol></div>
+          <div class="panel"><div class="panel-head"><h3>Countries</h3><span>Visitors</span></div><ol class="rows" data-dim="country" data-share></ol></div>
+          <div class="panel"><div class="panel-head"><h3>Devices</h3><span>Visitors</span></div><ol class="rows" data-dim="deviceType" data-share></ol></div>
+          <div class="panel"><div class="panel-head"><h3>Operating Systems</h3><span>Visitors</span></div><ol class="rows" data-dim="osName" data-share></ol></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="edge foot">
+    <p><a href="https://www.vaidra.org">Visit vaidra.org</a></p>
+    <p class="meta">Reach, library and volunteer counts come from <a href="https://www.vaidra.org/api/stats">vaidra.org/api/stats</a> and refresh every 5 minutes. Site traffic comes from Vercel Analytics on vaidra.org and refreshes on the same schedule.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,2 @@
+/* Without JavaScript the "Loading" line would never resolve; the noscript message replaces it. */
+#loading { display: none; }

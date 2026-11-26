@@ -1,0 +1,32 @@
+{
+  "partnerReach": {
+    "students": 60000,
+    "schools": 450,
+    "asOf": "October 2026",
+    "partners": [
+      "Sevalaya (Chennai)",
+      "Rural Development Trust (Anantapur)",
+      "Siddhartha Institute of Engineering and Technology",
+      "Siddharth Institute of Engineering & Technology (Puttur)",
+      "Zilla Parishad High School, Kanchikacherla"
+    ]
+  },
+  "library": {
+    "total": 141,
+    "courses": 80,
+    "audiobooks": 56,
+    "researchPapers": 5,
+    "languages": {
+      "Hindi": 35,
+      "Telugu": 23,
+      "English": 17,
+      "Tamil": 16,
+      "Kannada": 14,
+      "Marathi": 13,
+      "Punjabi": 12,
+      "Bengali": 11
+    }
+  },
+  "volunteers": { "total": 29, "teachers": 17, "speakers": 12 },
+  "updatedAt": "2026-11-25T18:00:00.000Z"
+}

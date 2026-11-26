@@ -1,0 +1,6 @@
+# GitHub Pages publishes only the page itself. The fixture and dev files stay in the repo
+# but off the live origin, so no data file other than vaidra.org's API sits beside the page.
+exclude:
+  - sample-stats.json
+  - check.mjs
+  - README.md

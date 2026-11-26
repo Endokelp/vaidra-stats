@@ -1,0 +1,280 @@
+/* Palette and type follow vaidra.org (tailwind.config.js): paper, sand, ink, cobalt, butter gold, Fraunces.
+   Dark mode follows the system and swaps cobalt for gold, as the main site does. */
+@font-face {
+  font-family: Fraunces;
+  src: url(fonts/fraunces-latin.woff2) format("woff2");
+  font-weight: 500 700;
+  font-display: swap;
+}
+
+:root {
+  --paper: #FBF8F2;
+  --sand: #F4EEE3;
+  --ink: #201C16;
+  --muted: #6B6357;
+  --rule: #D9D0BF;
+  --track: #E7E0D3;
+  --accent: #1D5FD4;
+  --danger: #A32A1B;
+  --up: #1D6B3A;
+  --display: Fraunces, ui-serif, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --gutter: max(1rem, calc((100% - 72rem) / 2));
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121829;
+    --sand: #1B2440;
+    --ink: #F5F1E8;
+    --muted: #B7BCCB;
+    --rule: #3A4772;
+    --track: #27335C;
+    --accent: #EFCB68;
+    --danger: #F4A79B;
+    --up: #8BD9A6;
+    /* Gold at 10% over navy mixes to a flat gray; less keeps it a tint. */
+    --area: 0.06;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1.0625rem/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+}
+
+.edge { padding-inline: var(--gutter); }
+h1, h2, h3, p, ul, dl, dd { margin: 0; padding: 0; }
+ul { list-style: none; }
+
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.top { padding-block: 1.25rem; }
+.brand {
+  font: 600 1.375rem/1 var(--display);
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.brand:hover { color: var(--accent); }
+
+.eyebrow {
+  font: 600 0.8125rem/1.3 var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+
+.intro { padding-block: 0.5rem 1.75rem; }
+.intro p, .failure > * { max-width: 36rem; }
+.lede { margin-top: 0.5rem; }
+.meta { margin-top: 0.5rem; font-size: 0.9375rem; color: var(--muted); }
+.meta.warn { color: var(--danger); }
+
+.loading { padding-block: 2rem 4rem; color: var(--muted); }
+/* Holds the footer below the fold until the numbers arrive, so it does not jump (CLS). */
+#loading { min-height: 100svh; }
+.failure { padding-block: 1.5rem 4rem; }
+.failure h2 { font: 600 1.75rem/1.2 var(--display); margin-bottom: 0.75rem; }
+.failure .meta { margin-bottom: 1.25rem; overflow-wrap: anywhere; }
+button {
+  font: 600 1rem/1 var(--sans);
+  min-height: 2.75rem;
+  padding-inline: 1.25rem;
+  color: var(--ink);
+  background: transparent;
+  border: 2px solid var(--ink);
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+button:hover { background: var(--ink); color: var(--paper); }
+
+/* Sections: full-bleed ground, content on the shared gutter. Stacked on phones. */
+.block { padding-block: 2.5rem; display: grid; gap: 2rem; }
+.block { padding-inline: var(--gutter); }
+.band { background: var(--sand); }
+
+.num-hero, .num-mid, .num-lib, .num-vol, .ledger dd {
+  font-family: var(--display);
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
+  letter-spacing: -0.02em;
+  /* The automatic optical size at display scale draws the "+" as a hairline; this keeps it as heavy as the digits. */
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 48;
+}
+.unit { font: 500 1.125rem/1.3 var(--sans); letter-spacing: 0; color: var(--muted); }
+.num-hero, .num-mid, .num-lib, .num-vol { margin-top: 0.5rem; line-height: 0.98; }
+.num-hero { font-size: clamp(3.6rem, 22vw, 9rem); letter-spacing: -0.035em; }
+.num-hero .unit, .num-lib .unit, .num-vol .unit { display: block; margin-top: 0.5rem; }
+.num-mid { font-size: clamp(2.25rem, 10vw, 4rem); margin-top: 1.5rem; }
+.num-mid .unit { font-size: 1.125rem; }
+.num-lib { font-size: clamp(3.25rem, 15vw, 6rem); letter-spacing: -0.01em; }
+.num-vol { font-size: clamp(2.75rem, 12vw, 4.5rem); letter-spacing: -0.01em; }
+.note { margin-top: 1.25rem; max-width: 26rem; color: var(--muted); }
+
+.ruled li { padding-block: 0.7rem; border-top: 1px solid var(--rule); }
+.ruled li:last-child { border-bottom: 1px solid var(--rule); }
+.reach-partners .eyebrow { margin-bottom: 0.75rem; }
+
+.ledger { margin-top: 1.5rem; max-width: 26rem; }
+.ledger div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.6rem;
+  border-top: 1px solid var(--rule);
+}
+.ledger div:last-child { border-bottom: 1px solid var(--rule); }
+.ledger dd { font-size: 1.625rem; line-height: 1.2; }
+.volunteers .ledger { margin-top: 0; align-self: end; }
+
+.bars { margin-top: 0.75rem; }
+.bars li {
+  display: grid;
+  grid-template-columns: 5.75rem 1fr 2.25rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 0.35rem;
+}
+.bar { height: 0.625rem; background: var(--track); border-radius: 2px; overflow: hidden; }
+.fill { display: block; height: 100%; width: var(--w, 0); background: var(--accent); }
+.count { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* Site traffic, laid out like Vercel's Web Analytics page: a card of metric tabs over the
+   hourly chart, then top-N panels with a share bar behind each row. */
+.traffic { gap: 1rem; }
+.traffic-head { display: grid; gap: 0.75rem; margin-bottom: 0.5rem; }
+.traffic-head .note { margin-top: 0; max-width: 36rem; }
+.tag {
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+  color: var(--ink);
+  letter-spacing: 0.1em;
+}
+.panel { min-width: 0; background: var(--paper); border: 1px solid var(--rule); border-radius: 0.5rem; }
+.metrics { display: flex; border-bottom: 1px solid var(--rule); }
+.metric {
+  display: grid;
+  gap: 0.25rem;
+  min-height: 0;
+  padding: 1rem 1.25rem 0.9rem;
+  margin-bottom: -1px;
+  text-align: left;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  color: var(--muted);
+}
+.metric:hover { background: none; color: var(--ink); }
+.metric:focus-visible { outline-offset: -3px; }
+.metric[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.metric-name { font-size: 0.875rem; font-weight: 500; }
+.metric-row { display: flex; align-items: center; gap: 0.6rem; }
+.metric-num { font-size: 1.75rem; line-height: 1.15; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.change {
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+.change[data-trend="up"] { color: var(--up); }
+.change[data-trend="down"] { color: var(--danger); }
+.hourly { margin: 0; padding: 1rem 1.25rem 1.25rem; }
+.hourly .meta { margin-top: 0; font-size: 0.8125rem; }
+.chart { position: relative; margin-top: 0.75rem; }
+#hourly-svg { display: block; width: 100%; height: 15rem; touch-action: pan-y; }
+#hourly-svg:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.grid { stroke: var(--rule); stroke-width: 1; shape-rendering: crispEdges; }
+.tick { fill: var(--muted); font: 0.75rem var(--sans); font-variant-numeric: tabular-nums; }
+.line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.line.partial { stroke-dasharray: 4 4; }
+.area { fill: var(--accent); opacity: var(--area, 0.1); }
+.dot { fill: var(--accent); stroke: var(--paper); stroke-width: 2; }
+.cross { stroke: var(--muted); stroke-width: 1; shape-rendering: crispEdges; }
+.tip {
+  position: absolute;
+  top: 0;
+  display: grid;
+  padding: 0.5rem 0.75rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.tip strong { font-size: 1rem; font-variant-numeric: tabular-nums; }
+.tip .when { color: var(--muted); }
+
+.panels { display: grid; gap: 1rem; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.panel-head h3 { font: 600 0.9375rem/1.3 var(--sans); }
+.panel-head span { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.rows { display: grid; gap: 0.25rem; margin: 0; padding: 0.5rem; list-style: none; }
+.rows li {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9375rem;
+}
+.rows li::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w, 0);
+  background: var(--track);
+  border-radius: 0.25rem;
+}
+.rows span { position: relative; }
+.rows .label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rows .value { font-variant-numeric: tabular-nums; }
+/* On a wrapper, not the table: a table never shrinks below its content and would widen the page. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.foot { padding-block: 2rem 3rem; }
+.foot .meta { margin-top: 0.25rem; }
+
+@media (min-width: 56rem) {
+  .top { padding-block: 1.75rem; }
+  .intro { padding-bottom: 1rem; }
+  .block { grid-template-columns: 7fr 5fr; column-gap: 4rem; padding-block: 3.5rem; align-items: end; }
+  .library { grid-template-columns: 5fr 7fr; align-items: start; }
+  .volunteers { grid-template-columns: 5fr 7fr; }
+  .traffic { grid-template-columns: minmax(0, 1fr); align-items: stretch; }
+  .panels { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .panels .panel { grid-column: span 2; }
+  .panels .panel.wide { grid-column: span 3; }
+  .bars li { grid-template-columns: 6.5rem 1fr 2.5rem; }
+}
